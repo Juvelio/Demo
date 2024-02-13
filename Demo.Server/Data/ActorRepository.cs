@@ -88,7 +88,6 @@ namespace Demo.Server.Data
             return respuesta;
         }
 
-
         public async Task<string> ModificarActor(Actor actor)
         {
             string respuesta = null;
@@ -128,7 +127,6 @@ namespace Demo.Server.Data
             return respuesta;
         }
 
-
         public async Task<string> EliminarActor(Actor actor)
         {
             string respuesta = null;
@@ -141,7 +139,7 @@ namespace Demo.Server.Data
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Trans", "D");
 
-                cmd.Parameters.AddWithValue("@Id", actor.Id);             
+                cmd.Parameters.AddWithValue("@Id", actor.Id);
 
 
                 SqlParameter output = new SqlParameter("@Result", SqlDbType.VarChar, 100);
@@ -163,7 +161,6 @@ namespace Demo.Server.Data
             }
             return respuesta;
         }
-
 
     }
 }

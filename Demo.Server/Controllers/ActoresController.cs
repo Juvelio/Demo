@@ -24,16 +24,7 @@ namespace Demo.Server.Controllers
         {
             List<Actor> actores = await _context.Actor.ToListAsync();
             return actores;
-        }
-
-        [HttpGet("procedimiento")]
-        public async Task<List<Actor>> GetProcedimeintoAlmacenado()
-        {
-            List<Actor> actores = _repository.ListarActores();
-            return actores;
-        }
-
-
+        }     
 
         [HttpPost]
         public async Task<Actor> Post(Actor actor)
@@ -44,8 +35,14 @@ namespace Demo.Server.Controllers
             return actor;
         }
 
+        [HttpGet("Listar")]
+        public async Task<List<Actor>> GetProcedimeintoAlmacenado()
+        {
+            List<Actor> actores = _repository.ListarActores();
+            return actores;
+        }
 
-        [HttpPost("procedimiento")]
+        [HttpPost("Insetar")]
         public async Task<string> PostProcedimeinto(Actor actor)
         {
             string respuesta = await _repository.InsertarActor(actor);
@@ -59,14 +56,11 @@ namespace Demo.Server.Controllers
             return respuesta;
         }
 
-
         [HttpPost("Eliminar")]
         public async Task<string> PostEliminar(Actor actor)
         {
             string respuesta = await _repository.EliminarActor(actor);
             return respuesta;
         }
-
-
     }
 }
