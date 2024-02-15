@@ -20,11 +20,11 @@ namespace Demo.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<List<Actor>> Get()
+        public async Task<ActionResult<List<Actor>>> Get()
         {
             List<Actor> actores = await _context.Actor.ToListAsync();
             return actores;
-        }     
+        }
 
         [HttpPost]
         public async Task<Actor> Post(Actor actor)

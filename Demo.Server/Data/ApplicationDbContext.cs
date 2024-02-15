@@ -14,8 +14,22 @@ namespace Demo.Server.Data
         {
         }
 
-        public DbSet<Demo.Shared.Entidades.Genero> Genero { get; set; } = default!;
-        public DbSet<Demo.Shared.Entidades.Actor> Actor { get; set; } = default!;
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<GeneroPelicula>().HasKey(x => new { x.GeneroId, x.PeliculaId });
+            modelBuilder.Entity<PeliculaActor>().HasKey(x => new { x.ActorId, x.PeliculaId });
+        }
+
+
+        public DbSet<Genero> Genero { get; set; } = default!;
+        public DbSet<Actor> Actor { get; set; } = default!;
+        public DbSet<Pelicula> Pelicula { get; set; } = default!;
+
+        public DbSet<GeneroPelicula> GenerosPeliculas { get; set; } = default!;
+        public DbSet<PeliculaActor> PeliculasActores { get; set; } = default!;
+        public DbSet<VotoPelicula> VotosPeliculas { get; set; } = default!;
 
     }
 }
