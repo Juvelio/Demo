@@ -81,9 +81,9 @@ else
         var data = await respositorio.Delete($"api/generos/{genero.Id}");
 
         if (data)
-            navigationManager.NavigateTo("generos");
+            // navigationManager.NavigateTo("genero");
+            await Cargar();
 
-        StateHasChanged();
     }
 
 
