@@ -1,0 +1,55 @@
+﻿@page "/generos/editar/{GeneroId:int}"
+@using Demo.Client.Repositorios
+@using Demo.Shared.Entidades
+@inject GeneroRepositorio respositorio
+@inject NavigationManager navigationManager
+
+<h3>Editar Genero</h3>
+
+@if (Genero == null)
+{
+    <p>Cargando...</p>
+}
+else
+{
+    <FormularioGenero @ref="formularioGenero" Genero="Genero" OnValidSubmit="Editar" />
+}
+
+
+
+@code {
+    [Parameter]
+    public int GeneroId { get; set; }
+    private Genero? Genero;
+    private FormularioGenero? formularioGenero;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CargarGenero();
+    }
+
+    private async Task CargarGenero()
+    {
+        var data = await respositorio.GetGenero($"api/generos/{GeneroId}");
+        Genero = data;
+    }
+
+    private async Task Editar()
+    {
+        var respuesta = await respositorio.Put($"api/generos/{Genero.Id}", Genero);
+
+        if (!respuesta)
+        {
+            //modatrar un errror
+        }
+        else
+        {
+            navigationManager.NavigateTo("generos");
+        }
+
+    }
+
+
+
+}

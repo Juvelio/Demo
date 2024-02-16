@@ -1,0 +1,30 @@
+﻿@page "/generos/crear"
+@using Demo.Client.Repositorios
+@using Demo.Shared.Entidades
+@inject GeneroRepositorio respositorio
+@inject NavigationManager navigationManager
+
+
+<h3>Crear Genero</h3>
+
+<FormularioGenero @ref="formularioGenero" Genero="Genero" OnValidSubmit="Crear" />
+
+@code {
+    private Genero Genero = new Genero();
+    private FormularioGenero? formularioGenero;
+
+    private async Task Crear()
+    {
+        var respuesta = await respositorio.Post("api/generos", Genero);
+
+        if (!respuesta)
+        {
+            //modatrar un errror
+
+        }
+        else
+        {
+            navigationManager.NavigateTo("generos");
+        }
+    }
+}

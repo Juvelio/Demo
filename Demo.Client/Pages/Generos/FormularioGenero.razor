@@ -1,0 +1,24 @@
+﻿@using Demo.Shared.Entidades
+
+<EditForm Model="Genero" OnValidSubmit="OnValidSubmit">
+    <div class="mb-3">
+        <labe>Nombre:</labe>
+        <div>
+            <InputText class="form-control" @bind-Value="@Genero.Nombre" />
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="submit">Guardar Cambios</button>
+</EditForm>
+
+@code {
+    [EditorRequired]
+    [Parameter]
+    public Genero Genero { get; set; }
+
+
+    [EditorRequired]
+    [Parameter]
+    public EventCallback OnValidSubmit { get; set; }
+
+}
