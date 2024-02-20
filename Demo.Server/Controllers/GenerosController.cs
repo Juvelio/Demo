@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Demo.Server.Data;
 using Demo.Shared.Entidades;
+using Demo.Shared.DTOs;
+using Demo.Server.Helpers;
 
 namespace Demo.Server.Controllers
 {
@@ -21,11 +23,41 @@ namespace Demo.Server.Controllers
             _context = context;
         }
 
+
+        [HttpPost("insertarMasivo")]
+        public async Task<ActionResult> CargaMasiva()
+        {
+            try
+            {
+                List<Genero> generos = new List<Genero>();
+
+                for (int i = 0; i < 10000; i++)
+                {
+                    generos.Add(new Genero { Estado = true, Nombre = $"Genero {i}" });
+                }
+
+                await _context.AddRangeAsync(generos);
+                await _context.SaveChangesAsync();
+
+                return Ok($"Se inserto {generos.Count} a la base de datos.");
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest($"cocurrio un erroro  {ex.Message}");
+            }
+        }
+
+
         // GET: api/Generos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genero>>> GetGenero()
+        public async Task<ActionResult<IEnumerable<Genero>>> GetGenero([FromQuery] PaginacionDTO paginacion)
         {
-            return await _context.Genero.ToListAsync();
+            //return await _context.Genero.ToListAsync();
+
+            var queryable = _context.Genero.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnRespuesta(queryable, paginacion.CantidadRegistros);
+            return await queryable.Paginar(paginacion).ToListAsync();
         }
 
         // GET: api/Generos/5
@@ -60,7 +92,7 @@ namespace Demo.Server.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-               
+
             }
 
             return NoContent();

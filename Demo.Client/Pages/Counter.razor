@@ -1,4 +1,5 @@
 ﻿@page "/counter"
+@inject SweetAlertService Swal;
 
 <PageTitle>Counter</PageTitle>
 
@@ -11,8 +12,11 @@
 @code {
     private int currentCount = 0;
 
-    private void IncrementCount()
+    private async void IncrementCount()
     {
-        currentCount++;
+        // currentCount++;
+
+        // await Swal.FireAsync("OK");
+        await Swal.FireAsync("Oops...", "Something went wrong!", "success");
     }
 }

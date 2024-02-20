@@ -3,7 +3,7 @@
 @using Demo.Shared.Entidades
 @inject GeneroRepositorio respositorio
 @inject NavigationManager navigationManager
-
+@inject SweetAlertService Swal
 
 <h3>Crear Genero</h3>
 
@@ -20,10 +20,13 @@
         if (!respuesta)
         {
             //modatrar un errror
+            await Swal.FireAsync("Error", "Ocurrio un error al crear genero", "error");
 
         }
         else
         {
+
+            await Swal.FireAsync("Ok", "Genero se creo correctamente", "success");
             navigationManager.NavigateTo("generos");
         }
     }

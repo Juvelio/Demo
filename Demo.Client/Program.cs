@@ -1,3 +1,4 @@
+using CurrieTechnologies.Razor.SweetAlert2;
 using Demo.Client;
 using Demo.Client.Repositorios;
 using Microsoft.AspNetCore.Components.Web;
@@ -11,6 +12,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 
 
 builder.Services.AddScoped<GeneroRepositorio>();
+builder.Services.AddSweetAlert2();
 
 
 await builder.Build().RunAsync();

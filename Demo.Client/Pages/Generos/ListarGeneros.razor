@@ -1,5 +1,5 @@
-﻿@page "/genero"
-@page "/generos"
+﻿@page "/generos"
+@inject SweetAlertService Swal;
 
 @using Demo.Client.Repositorios
 @using Demo.Shared.Entidades
@@ -78,12 +78,17 @@ else
 
     private async Task Borrar(Genero genero)
     {
+
         var data = await respositorio.Delete($"api/generos/{genero.Id}");
 
         if (data)
-            // navigationManager.NavigateTo("genero");
+        {           
             await Cargar();
-
+        }
+        else
+        {
+           
+        }
     }
 
 

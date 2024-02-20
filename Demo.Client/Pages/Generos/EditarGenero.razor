@@ -22,6 +22,7 @@ else
     public int GeneroId { get; set; }
     private Genero? Genero;
     private FormularioGenero? formularioGenero;
+    @inject SweetAlertService Swal
 
 
     protected override async Task OnInitializedAsync()
@@ -42,6 +43,7 @@ else
         if (!respuesta)
         {
             //modatrar un errror
+            await Swal.FireAsync("Error", "Ocurrio un error al modificar genero", "error");
         }
         else
         {

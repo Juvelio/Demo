@@ -1,7 +1,14 @@
 ﻿@page "/"
+@inject SweetAlertService Swal;
 
 <PageTitle>Home</PageTitle>
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
+
+
+<button class="btn btn-primary"
+        @onclick="@(async () => await Swal.FireAsync("Any fool can use a computer"))">
+    Try me!
+</button>
