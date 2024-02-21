@@ -9,6 +9,7 @@ using Demo.Server.Data;
 using Demo.Shared.Entidades;
 using Demo.Shared.DTOs;
 using Demo.Server.Helpers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Demo.Server.Controllers
 {
@@ -51,6 +52,8 @@ namespace Demo.Server.Controllers
 
         // GET: api/Generos
         [HttpGet]
+        //[Authorize]     //SOLO USUARIOS AUTENTICADOS
+        [Authorize(Roles = "superusuario")] //SOLO LOS USURIOS QUE SON SUPERUSUARIO PUEDEN ACCEDER A ESTE RECURSO
         public async Task<ActionResult<IEnumerable<Genero>>> GetGenero([FromQuery] PaginacionDTO paginacion)
         {
             //return await _context.Genero.ToListAsync();
