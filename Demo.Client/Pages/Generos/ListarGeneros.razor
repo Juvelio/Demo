@@ -1,8 +1,5 @@
 ﻿@page "/generos"
 @inject SweetAlertService Swal;
-
-@using Demo.Client.Repositorios
-@using Demo.Shared.Entidades
 @inject GeneroRepositorio respositorio
 @inject NavigationManager navigationManager
 
@@ -45,6 +42,7 @@ else
                             <a href="/generos/editar/@genero.Id" class="btn btn-success">Editar</a>
                         </td>
                         <td>
+
                             <button class="btn btn-danger" @onclick="()=> Borrar(genero)"> Borrar </button>
                         </td>
                     </tr>

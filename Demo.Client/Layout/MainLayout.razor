@@ -6,7 +6,23 @@
 
     <main>
         <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+
+            <AuthorizeView>
+                <Authorized>
+                    <span>Hola, @context.User.Identity?.Name</span>
+                    <a href="#" class="nav-link btn btn-link">Salir</a>
+                </Authorized>
+
+                <NotAuthorized>
+                    <a href="#">Registro</a>
+                    <a href="login" class="nav-link btn btn-link">Login</a>
+                </NotAuthorized>
+
+            </AuthorizeView>
+
+            @* <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a> *@
+
+
         </div>
 
         <article class="content px-4">
